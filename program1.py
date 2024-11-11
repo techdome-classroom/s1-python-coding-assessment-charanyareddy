@@ -1,21 +1,24 @@
 class Solution:
-   
-    def getTotalIsles(self, grid: list[list[str]]) -> int:
-        if not grid:
-            return 0
-        rows,cols=len(grid),len(grid[0])
-        island_count=0
-        def dfs(r,c):
-            if r<0 or r >=rows or c<0 or c>=cols or grid[r][c]=='w':
+    def countIslands(self, map_grid: list[list[str]]) -> int:
+
+        def explore(x, y):
+            if x < 0 or y < 0 or x >= len(map_grid) or y >= len(map_grid[0]) or map_grid[x][y] != 'L':
                 return
-            grid[r][c]='w'
-            dfs(r+1,c)
-            dfs(r-1,c)
-            dfs(r,c+1)
-            dfs(r,c-1)
-        for r in range(rows):
-            for c in range(cols):
-                if grid[r][c]=='L':
-                    island_count+=1
-                    dfs(r,c)
+            map_grid[x][y] = 'W'
+            explore(x + 1, y)
+            explore(x - 1, y)
+            explore(x, y + 1)
+            explore(x, y - 1)
+
+        if not map_grid:
+            return 0
+
+        island_count = 0
+
+        for row in range(len(map_grid)):
+            for col in range(len(map_grid[0])):
+                if map_grid[row][col] == 'L':
+                    explore(row, col)
+                    island_count += 1
+
         return island_count
