@@ -22,3 +22,8 @@ class Solution:
                     island_count += 1
 
         return island_count
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 031b1035e2b9c51e2bf637ea02de5d78a5ed61a3
